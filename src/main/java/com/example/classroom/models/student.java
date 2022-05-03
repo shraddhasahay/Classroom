@@ -3,10 +3,10 @@ package com.example.classroom.models;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+
 import javax.persistence.Table;
 
-import org.springframework.web.multipart.MultipartFile;
+
 
 
 @Entity
@@ -22,19 +22,12 @@ public class student {
     @Column
     private String PHONE;
 
-    @Column
-    private byte[] Assignment;
+    
+    
     
     public student() {
     }
 
-    public byte[] getAssignment() {
-        return this.Assignment;
-    }
-
-    public void setAssignment(byte[] Assignment) {
-        this.Assignment = Assignment;
-    }
     
     public String getUSN() {
         return this.USN;

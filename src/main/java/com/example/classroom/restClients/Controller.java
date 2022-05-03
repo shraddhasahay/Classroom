@@ -45,34 +45,19 @@ public class Controller {
       return studentService.getAllStudents();
     }
 
-    @GetMapping(value="/studentFile", consumes="application/pdf")
-    public void getStudents() {
-      studentService.fileStudnet();
-      // return new ResponseEntity<String>(HttpStatus.OK);
-    }
+   
 
     @PostMapping("/upload/db")
-  public ResponseEntity uploadToDB(@RequestParam String name, @RequestParam String phone, @RequestParam String email, @RequestParam String usn,@RequestParam("file") MultipartFile file) {
+  public ResponseEntity uploadToDB(@RequestParam String name, @RequestParam String phone, @RequestParam String email, @RequestParam String usn) {
 	student stud = new student();
   stud.setEMAIL(email);
   stud.setPHONE(phone);
   stud.setNAME(name);
   stud.setUSN(usn);
-	String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-	try {
-    byte[] inFileBytes = file.getBytes();
-    // byte[] inFileBytes = "Hello Dear".getBytes(); 
-    byte[] encoded = java.util.Base64.getEncoder().encode(inFileBytes);
-	  stud.setAssignment(encoded);
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
+	
   studentRepository.save(stud);
-	String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-			.path("/files/download/")
-			.path(fileName).path("/db")
-			.toUriString();
-	return ResponseEntity.ok(fileDownloadUri);
+	
+	return new ResponseEntity<>("Hello World!", HttpStatus.OK);
 }
 
 }

@@ -30,30 +30,9 @@ public class StudentService {
     public void addStudent(student stud) {
         studentRepository.save(stud);
     }
-    public void fileStudnet() {
-        ArrayList<student> students = new ArrayList<student>();
-        studentRepository.findAll().forEach(student -> students.add(student));
-        for(student s : students){
-            try {
-                if(s.getAssignment()!=null){
-                    // OutputStream out = new FileOutputStream(s.getUSN()+".pdf");
-                    // out.write(s.getAssignment());
-                    // out.close();
-                    byte[] decoded = java.util.Base64.getDecoder().decode(s.getAssignment());
-                    FileOutputStream fos = new FileOutputStream(s.getUSN()+".pdf");
-                    fos.write(decoded);
-                    fos.flush();
-                    fos.close();
-                    Path p = Paths.get(s.getUSN()+"path.pdf");
-                    Files.write(p,decoded);
-                }
-           
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    
         
     }  
    
  
-}
+
